@@ -1,0 +1,26 @@
+{
+  "name": "iic-managment-system",
+  "version": "1.0.0",
+  "description": "Restful API for Intelligent Innovations Confrence Management System.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Tech Reagan",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-mongo-sanitize": "^1.3.2",
+    "express-rate-limit": "^5.0.0",
+    "helmet": "^3.21.2",
+    "hpp": "^0.2.3",
+    "mongoose": "^5.8.7",
+    "morgan": "^1.9.1",
+    "xss-clean": "^0.1.1"
+  }
+}
