@@ -41,4 +41,11 @@ const talkSchema = new Schema(
   { timestamps: true }
 )
 
+// Cascade delete attendee added to talk when a talk is deleted
+talkSchema.pre('remove', async function(next) {
+  // console.log(`Attendee being removed from post ${this._id}`)
+  await this.model('TalkAttendee').deleteMany({ talk: this._id })
+  next()
+})
+
 module.exports = mongoose.model('Talk', talkSchema)

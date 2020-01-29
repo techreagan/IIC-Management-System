@@ -62,3 +62,20 @@ exports.addAttendee = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({ success: true, data: talkAttendee })
 })
+
+// @desc    Delete Talk
+// @route   DELETE /api/v1/talks/:id
+// @access  Public
+exports.deleteTalk = asyncHandler(async (req, res, next) => {
+  const id = req.params.id
+
+  const talk = await Talk.findById(id)
+
+  if (!talk) {
+    return next(new ErrorResponse(`Talk with id of ${id} not found`, 404))
+  }
+
+  talk.remove()
+
+  res.status(200).json({ success: true, data: {} })
+})
