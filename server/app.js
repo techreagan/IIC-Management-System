@@ -18,6 +18,7 @@ dotenv.config({ path: './config/.env' })
 DBConnection()
 
 const talkRoutes = require('./routes/talks')
+const attendeeRoutes = require('./routes/attendees')
 
 const app = express()
 
@@ -53,6 +54,7 @@ app.use(hpp())
 const versionOne = routeName => `/api/v1/${routeName}`
 
 app.use(versionOne('talks'), talkRoutes)
+app.use(versionOne('attendees'), attendeeRoutes)
 
 app.use(errorHandler)
 
