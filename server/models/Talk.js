@@ -10,7 +10,7 @@ const talkSchema = new Schema(
     },
     description: {
       type: String,
-      required: [true, 'Please add description']
+      required: [false, 'Please add description']
     },
     speakerEmail: {
       type: String,
@@ -32,6 +32,10 @@ const talkSchema = new Schema(
     speakerBio: {
       type: String,
       required: [true, 'Please add speaker bio']
+    },
+    hall: {
+      type: Number,
+      required: [true, 'Please add hall number']
     }
   },
   { timestamps: true }
