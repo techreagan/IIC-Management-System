@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 const Talk = require('../models/Talk')
-const { getTalks, createTalk } = require('../controllers/talk')
+const { getTalks, createTalk } = require('../controllers/talks')
 
 const advancedResults = require('../middleware/advancedResults')
 
