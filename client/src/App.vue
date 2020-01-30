@@ -81,19 +81,22 @@ input.select-dropdown.dropdown-trigger {
 
 .input-field input[type='text']:focus,
 .input-field input[type='password']:focus,
-.input-field input:focus.select-dropdown.dropdown-trigger {
+.input-field input:focus.select-dropdown.dropdown-trigger,
+textarea:focus {
   border-bottom: 1px solid #7b1fa2 !important;
   box-shadow: 0 1px 0 0 #7b1fa2 !important;
 }
 
 /* =========== Error Input ============== */
 .input-field input.is-invalid:focus ~ label,
-.input-field select.is-invalid:focus ~ label {
+.input-field select.is-invalid:focus ~ label,
+.input-field textarea.is-invalid:focus ~ label {
   color: #ba2525;
 }
 
 .input-field input.is-invalid + .invalid-feedback.helper-text,
-.input-field.is-invalid .invalid-feedback.helper-text {
+.input-field.is-invalid .invalid-feedback.helper-text,
+.input-field textarea.is-invalid + .invalid-feedback.helper-text {
   opacity: 1;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -107,6 +110,7 @@ input.select-dropdown.dropdown-trigger {
 }
 
 .input-field input.is-invalid:focus,
+.input-field textarea.is-invalid:focus,
 .input-field.is-invalid input.select-dropdown.dropdown-trigger:focus {
   border-bottom: 1px solid #ba2525 !important;
   box-shadow: 0 1px 0 0 #ba2525 !important;

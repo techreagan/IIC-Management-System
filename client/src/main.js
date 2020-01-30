@@ -5,12 +5,17 @@ import store from './store'
 import 'materialize-css'
 import 'materialize-css/dist/css/materialize.css'
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
-import { required, email } from 'vee-validate/dist/rules'
+import { required, email, numeric } from 'vee-validate/dist/rules'
 Vue.config.productionTip = false
 
 extend('email', {
   ...email,
   message: 'Email is not valid'
+})
+
+extend('numeric', {
+  ...numeric,
+  message: 'The {_field_} must be numeric'
 })
 
 extend('min', {
