@@ -171,6 +171,13 @@ export default {
     this.attendees = attendees.data.data
     this.isLoading = false
     M.AutoInit()
+  },
+  created() {
+    if (this.$store.getters.dataCreated) {
+      M.Toast.dismissAll()
+      M.toast({ html: 'Attendee Added', classes: 'green' })
+      this.$store.dispatch('setDataCreated', false)
+    }
   }
 }
 </script>

@@ -5,11 +5,22 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    dataCreated: false,
+    helo: 'coding'
+  },
+  getters: {
+    dataCreated: state => {
+      return state.dataCreated
+    }
   },
   mutations: {
+    setDataCreated(state, bool) {
+      state.dataCreated = bool
+    }
   },
   actions: {
-  },
-  modules: {
+    setDataCreated({ commit }, payload) {
+      commit('setDataCreated', payload)
+    }
   }
 })

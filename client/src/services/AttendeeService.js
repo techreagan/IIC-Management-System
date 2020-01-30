@@ -6,5 +6,8 @@ export default {
   },
   deleteById(id) {
     return Api().delete(`attendees/${id}`)
+  },
+  create(payload) {
+    return Api().post('attendees', payload)
   }
 }

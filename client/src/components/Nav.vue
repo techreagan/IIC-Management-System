@@ -5,15 +5,20 @@
         <div style class="nav-wrapper cf">
           <ul class="left show-on-medium-and-down hide-on-med-and-up">
             <li>
-              <a href="#" data-target="slide-out" class="sidenav-trigger" style="margin: 0">
+              <a
+                href="#"
+                data-target="slide-out"
+                class="sidenav-trigger"
+                style="margin: 0"
+              >
                 <i class="fas fa-bars fa-lg primary-grey-color"></i>
               </a>
             </li>
           </ul>
 
-          <a href="#" class="brand-logo primary-grey-color">
+          <router-link to="/" class="brand-logo primary-grey-color">
             <strong>IIC Management System</strong>
-          </a>
+          </router-link>
         </div>
       </nav>
     </div>
