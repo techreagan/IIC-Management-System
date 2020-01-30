@@ -25,11 +25,7 @@
                     :ref="attendee._id"
                     class="btn-small red delete-btn modal-trigger"
                   >
-                    <i
-                      data-id="<%= interview._id %>"
-                      style
-                      class="fas fa-trash"
-                    ></i>
+                    <i style class="fas fa-trash"></i>
                   </a>
                 </div>
 
