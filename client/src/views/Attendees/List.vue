@@ -1,6 +1,5 @@
 <template>
   <div class="col s12 m12 l10">
-    <!-- <button class="btn green">Add Talk</button> -->
     <div class="card-panel primary-color">
       <table class="centeed nav" id="table">
         <thead class="purple-background white-text">
@@ -13,7 +12,7 @@
         </thead>
 
         <tbody id="tableBody" :class="{ hide: isLoading }">
-          <tr v-for="attendee in attendees" :key="attendee._id">
+          <tr v-for="attendee in attendees.data" :key="attendee._id">
             <td>{{ attendee.fullName }}</td>
             <td>{{ attendee.email }}</td>
             <td>{{ attendee.company }}</td>
@@ -97,6 +96,29 @@
           </div>
         </div>
       </div>
+      <ul class="pagination" :class="{ hide: isLoading }">
+        <li
+          class="waves-effect"
+          :class="{ disabled: page == 1 ? true : false }"
+        >
+          <a class="white-text" @click="currentPage((page -= 1))">&lt;</a>
+        </li>
+        <li
+          v-for="pageNum in attendees.totalPage"
+          :key="pageNum"
+          class="waves-effect"
+          :class="{ active: page == pageNum ? true : false }"
+        >
+          <a class="white-text" @click="currentPage(pageNum)">{{ pageNum }}</a>
+        </li>
+
+        <li
+          class="waves-effect"
+          :class="{ disabled: page == attendees.totalPage ? true : false }"
+        >
+          <a class="white-text" @click="currentPage((page += 1))">&gt;</a>
+        </li>
+      </ul>
     </div>
     <div id="deleteModal" ref="deleteModal" class="modal">
       <div class="modal-content">
@@ -104,14 +126,12 @@
         <p>Are you sure?</p>
       </div>
       <div class="modal-footer">
-        <!-- <form action="" method=""> -->
         <a href="#!" class="modal-close waves-effect waves-green btn-flat"
           >cancel</a
         >
         <button type="submit" class="btn red" @click="deleteAttendee">
           Delete
         </button>
-        <!-- </form> -->
       </div>
     </div>
   </div>
@@ -137,18 +157,33 @@ export default {
     return {
       isLoading: true,
       attendees: [],
+      page: 1,
       attendeeId: null,
       errors: null
-    }
-  },
-  watch: {
-    attendees() {
-      return this.attendees
     }
   },
   methods: {
     deleteModal(id) {
       this.attendeeId = id
+    },
+    async currentPage(num) {
+      if (num > this.attendees.totalPage) {
+        this.page = this.attendees.totalPage
+        return true
+      }
+      if (this.page <= 0) {
+        this.page = 1
+        return true
+      }
+
+      this.isLoading = true
+      this.page = num
+      const attendees = await AttendeeService.getAll(
+        `limit=5&page=${this.page}`
+      ).catch(err => (this.errors = err.reponse.data.error))
+
+      this.attendees = attendees.data
+      this.isLoading = false
     },
     async deleteAttendee(event) {
       await AttendeeService.deleteById(this.attendeeId).catch(
@@ -165,10 +200,12 @@ export default {
     }
   },
   async mounted() {
-    const attendees = await AttendeeService.getAll().catch(
+    this.isLoading = true
+    const attendees = await AttendeeService.getAll('limit=5').catch(
       err => (this.errors = err.reponse.data.error)
     )
-    this.attendees = attendees.data.data
+    this.attendees = attendees.data
+
     this.isLoading = false
     M.AutoInit()
   },

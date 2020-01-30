@@ -1,8 +1,8 @@
 import Api from '@/services/Api'
 
 export default {
-  getAll() {
-    return Api().get('attendees')
+  getAll(query) {
+    return Api().get(`attendees?${query}`)
   },
   deleteById(id) {
     return Api().delete(`attendees/${id}`)
