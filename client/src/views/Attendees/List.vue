@@ -21,8 +21,9 @@
               <div class="row">
                 <div class="col m2">
                   <a
-                    data-id="<%= interview._id %>"
+                    @click="deleteModal(attendee._id)"
                     href="#deleteModal"
+                    :ref="attendee._id"
                     class="btn-small red delete-btn modal-trigger"
                   >
                     <i
@@ -97,6 +98,22 @@
         </div>
       </div>
     </div>
+    <div id="deleteModal" ref="deleteModal" class="modal">
+      <div class="modal-content">
+        <h4 class="black-text">Delete Attendee</h4>
+        <p>Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <!-- <form action="" method=""> -->
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+          >cancel</a
+        >
+        <button type="submit" class="btn red" @click="deleteAttendee">
+          Delete
+        </button>
+        <!-- </form> -->
+      </div>
+    </div>
   </div>
 </template>
 
@@ -110,6 +127,8 @@
 }
 </style>
 
+<script src="/"></script>
+
 <script>
 import AttendeeService from '@/services/AttendeeService'
 
@@ -118,7 +137,31 @@ export default {
     return {
       isLoading: true,
       attendees: [],
+      attendeeId: null,
       errors: null
+    }
+  },
+  watch: {
+    attendees() {
+      return this.attendees
+    }
+  },
+  methods: {
+    deleteModal(id) {
+      this.attendeeId = id
+    },
+    async deleteAttendee(event) {
+      await AttendeeService.deleteById(this.attendeeId).catch(
+        err => (this.errors = err.reponse.data.error)
+      )
+
+      const instance = M.Modal.getInstance(this.$refs['deleteModal'])
+      instance.close()
+      this.$refs[this.attendeeId][0].closest('tr').remove()
+      // this.attendees = this.attendees.filter(
+      //   attendee => attendee._id == this.attendeeId
+      // )
+      M.toast({ html: 'Attendee Deleted', classes: 'red rounded' })
     }
   },
   async mounted() {
@@ -127,6 +170,7 @@ export default {
     )
     this.attendees = attendees.data.data
     this.isLoading = false
+    M.AutoInit()
   }
 }
 </script>

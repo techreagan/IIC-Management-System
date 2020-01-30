@@ -10,22 +10,7 @@
         </div>
       </main>
     </div>
-    <div id="deleteModal" class="modal">
-      <div class="modal-content">
-        <h4 class="black-text">Delete Interview</h4>
-        <p>Are you sure?</p>
-      </div>
-      <div class="modal-footer">
-        <form action="/dashboard/delete-interview" method="post">
-          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-          <input type="hidden" name="interviewId" />
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat"
-            >cancel</a
-          >
-          <button type="submit" class="btn red">Delete</button>
-        </form>
-      </div>
-    </div>
+
     <input id="message" type="hidden" value="<%= message %>" />
     <!-- <script src="/js/dashboardIndex.js"></script> -->
   </div>
