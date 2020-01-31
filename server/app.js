@@ -56,6 +56,10 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 const versionOne = routeName => `/api/v1/${routeName}`
 
+app.get(/^((?!\/api\/).)*$/, (req, res) => {
+  res.sendFile(__dirname + '/public/index.html')
+})
+
 app.use(versionOne('talks'), talkRoutes)
 app.use(versionOne('attendees'), attendeeRoutes)
 
