@@ -11,7 +11,7 @@
 
 ## API Documentation
 
-Hosted on netlify: [Blog API](https://blog-api-docs-77ae6a.netlify.com/)
+<!-- Hosted on netlify: [Blog API](https://blog-api-docs-77ae6a.netlify.com/) -->
 
 Extensive and testing documentation with postman: [IIC API](https://documenter.getpostman.com/view/9407876/SWTD6vrb?version=latest)
 
@@ -19,7 +19,7 @@ Extensive and testing documentation with postman: [IIC API](https://documenter.g
 
 Though the diagram uses sql data type, this diagram is to show you the various collections in the mongo database.
 
-![Screenshot](server/public/img/IIC-models.png)
+![Screenshot](server/public/img/IIC-models.PNG)
 
 ## Requirement
 
