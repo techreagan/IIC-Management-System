@@ -51,6 +51,44 @@
                 >
               </validation-provider>
               <validation-provider
+                rules=""
+                v-slot="{ errors }"
+                tag="div"
+                name="description"
+                class="input-field col s12 m12"
+              >
+                <input
+                  type="text"
+                  class="datepicker white-text"
+                  id="date"
+                  :class="{ 'is-invalid': errors[0] ? true : false }"
+                  ref="date"
+                />
+                <span class="helper-text invalid-feedback white-text">{{
+                  errors[0]
+                }}</span>
+                <label for="date" class="secondary-color">Date</label>
+              </validation-provider>
+              <validation-provider
+                rules=""
+                v-slot="{ errors }"
+                tag="div"
+                name="time"
+                class="input-field col s12 m12"
+              >
+                <input
+                  type="text"
+                  class="timepicker white-text"
+                  id="time"
+                  :class="{ 'is-invalid': errors[0] ? true : false }"
+                  ref="time"
+                />
+                <span class="helper-text invalid-feedback white-text">{{
+                  errors[0]
+                }}</span>
+                <label for="time" class="secondary-color">Time</label>
+              </validation-provider>
+              <validation-provider
                 rules="required|numeric"
                 v-slot="{ errors }"
                 tag="div"
@@ -175,6 +213,28 @@
   </div>
 </template>
 
+<style>
+.datepicker-date-display,
+.timepicker-digital-display {
+  background: linear-gradient(60deg, #7b1fa2, #913f9e);
+  background-image: linear-gradient(
+    60deg,
+    rgb(123, 31, 162),
+    rgb(145, 63, 158)
+  );
+}
+.datepicker-table td.is-today,
+.datepicker-cancel,
+.datepicker-done {
+  color: #7b1fa2;
+}
+
+.datepicker-table td.is-selected {
+  background: #7b1fa2;
+  color: #fff;
+}
+</style>
+
 <script src="/"></script>
 
 <script>
@@ -185,6 +245,8 @@ export default {
     return {
       title: '',
       description: '',
+      date: '',
+      time: '',
       hall: '',
       speakerFullName: '',
       speakerCompany: '',
@@ -194,9 +256,15 @@ export default {
   },
   methods: {
     async onSubmit() {
+      const date = M.Datepicker.getInstance(this.$refs['date']).toString()
+      // console.log(date)
+
+      const time = M.Timepicker.getInstance(this.$refs['time']).time
       const talk = await TalkService.create({
         title: this.title,
         description: this.description,
+        date: date,
+        time: time,
         hall: this.hall,
         speakerFullName: this.speakerFullName,
         speakerCompany: this.speakerCompany,
@@ -229,6 +297,11 @@ export default {
       this.$store.dispatch('setDataCreated', true)
       this.$router.push('/talks')
     }
+  },
+  mounted() {
+    M.AutoInit()
+
+    var instances = M.Timepicker.init(this.$refs['time'], { twelveHour: false })
   }
 }
 </script>

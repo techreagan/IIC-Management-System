@@ -1,17 +1,14 @@
 <template>
-  <div class="home">
-    <p>Home Page</p>
+  <div class="home mt-3">
+    <p>
+      This is a RESTful API for Intelligent Innovations Conference to manage
+      their conferences.
+    </p>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
   name: 'home'
-  // components: {
-  //   HelloWorld
-  // }
 }
 </script>

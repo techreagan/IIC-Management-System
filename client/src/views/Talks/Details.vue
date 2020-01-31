@@ -6,11 +6,13 @@
     <div class="card-panel primary-color">
       <p><b>Title: </b>{{ talk.title }}</p>
       <p><b>Description: </b>{{ talk.description }}</p>
+      <p><b>Date: </b>{{ talk.date }}</p>
+      <p><b>Time: </b>{{ talk.time }}</p>
       <p><b>Hall: </b>{{ talk.hall }}</p>
       <p><b>Speaker Full Name: </b>{{ talk.speakerFullName }}</p>
       <p><b>Speaker Company: </b>{{ talk.speakerCompany }}</p>
       <p><b>Speaker Email: </b>{{ talk.speakerEmail }}</p>
-      <p><b>Speaker Bio: </b>{{ talk.speakerEmail }}</p>
+      <p><b>Speaker Bio: </b>{{ talk.speakerBio }}</p>
     </div>
     <h5 class="heading" style="margin-top: 2em">
       <strong>List Of Attendees</strong>

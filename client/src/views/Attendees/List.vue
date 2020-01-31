@@ -2,125 +2,130 @@
   <div class="col s12 m12 l10">
     <div class="card-panel primary-color mt-3 overflow">
       <h5 class="heading mt-0"><strong>Attendees</strong></h5>
-      <table class="centeed nav" id="table">
-        <thead class="purple-background white-text">
-          <tr>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Company</th>
-            <th>Actions</th>
-            <th></th>
-          </tr>
-        </thead>
+      <template v-if="attendees.data.length">
+        <table class="centeed nav" id="table">
+          <thead class="purple-background white-text">
+            <tr>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Company</th>
+              <th>Actions</th>
+              <th></th>
+            </tr>
+          </thead>
 
-        <tbody id="tableBody" :class="{ hide: isLoading }">
-          <tr v-for="attendee in attendees.data" :key="attendee._id">
-            <td>{{ attendee.fullName }}</td>
-            <td>{{ attendee.email }}</td>
-            <td>{{ attendee.company }}</td>
-            <td class="cf">
-              <div class="row">
-                <div class="col m2">
-                  <a
-                    @click="deleteModal(attendee._id)"
-                    href="#deleteModal"
-                    :ref="attendee._id"
-                    class="btn-small red delete-btn modal-trigger"
-                  >
-                    <i style class="fas fa-trash"></i>
-                  </a>
+          <tbody id="tableBody" :class="{ hide: isLoading }">
+            <tr v-for="attendee in attendees.data" :key="attendee._id">
+              <td>{{ attendee.fullName }}</td>
+              <td>{{ attendee.email }}</td>
+              <td>{{ attendee.company }}</td>
+              <td class="cf">
+                <div class="row">
+                  <div class="col m2">
+                    <a
+                      @click="deleteModal(attendee._id)"
+                      href="#deleteModal"
+                      :ref="attendee._id"
+                      class="btn-small red delete-btn modal-trigger"
+                    >
+                      <i style class="fas fa-trash"></i>
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td>
-              <div class="row">
-                <div class="col m2 offset-m2">
-                  <a
-                    @click="detailsModal(attendee._id)"
-                    href="#detailsModal"
-                    :ref="attendee._id"
-                    class="btn-small purple-background modal-trigger"
-                    >Details</a
-                  >
+              </td>
+              <td>
+                <div class="row">
+                  <div class="col m2 offset-m2">
+                    <a
+                      @click="detailsModal(attendee._id)"
+                      href="#detailsModal"
+                      :ref="attendee._id"
+                      class="btn-small purple-background modal-trigger"
+                      >More</a
+                    >
+                  </div>
                 </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-      <div class="preloader-wrapper active" :class="{ hide: !isLoading }">
-        <div class="spinner-layer spinner-blue">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
+        <div class="preloader-wrapper active" :class="{ hide: !isLoading }">
+          <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
           </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
+
+          <div class="spinner-layer spinner-red">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
           </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
+
+          <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+
+          <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
           </div>
         </div>
+        <ul class="pagination" :class="{ hide: isLoading }">
+          <li
+            class="waves-effect"
+            :class="{ disabled: page == 1 ? true : false }"
+          >
+            <a class="white-text" @click="currentPage((page -= 1))">&lt;</a>
+          </li>
+          <li
+            v-for="pageNum in attendees.totalPage"
+            :key="pageNum"
+            class="waves-effect"
+            :class="{ active: page == pageNum ? true : false }"
+          >
+            <a class="white-text" @click="currentPage(pageNum)">{{
+              pageNum
+            }}</a>
+          </li>
 
-        <div class="spinner-layer spinner-red">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-
-        <div class="spinner-layer spinner-yellow">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-
-        <div class="spinner-layer spinner-green">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-      </div>
-      <ul class="pagination" :class="{ hide: isLoading }">
-        <li
-          class="waves-effect"
-          :class="{ disabled: page == 1 ? true : false }"
-        >
-          <a class="white-text" @click="currentPage((page -= 1))">&lt;</a>
-        </li>
-        <li
-          v-for="pageNum in attendees.totalPage"
-          :key="pageNum"
-          class="waves-effect"
-          :class="{ active: page == pageNum ? true : false }"
-        >
-          <a class="white-text" @click="currentPage(pageNum)">{{ pageNum }}</a>
-        </li>
-
-        <li
-          class="waves-effect"
-          :class="{ disabled: page == attendees.totalPage ? true : false }"
-        >
-          <a class="white-text" @click="currentPage((page += 1))">&gt;</a>
-        </li>
-      </ul>
+          <li
+            class="waves-effect"
+            :class="{ disabled: page == attendees.totalPage ? true : false }"
+          >
+            <a class="white-text" @click="currentPage((page += 1))">&gt;</a>
+          </li>
+        </ul>
+      </template>
+      <p v-else>No attendees yet</p>
     </div>
     <div id="deleteModal" ref="deleteModal" class="modal">
       <div class="modal-content">
@@ -185,7 +190,7 @@ export default {
   data() {
     return {
       isLoading: true,
-      attendees: [],
+      attendees: { data: [] },
       talks: [],
       talkId: '',
       page: 1,

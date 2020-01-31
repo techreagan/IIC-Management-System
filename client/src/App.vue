@@ -63,7 +63,11 @@ body {
   overflow-x: auto;
 }
 
-.th {
+.no-border {
+  border-radius: 0px;
+}
+
+th {
   border-radius: 0px !important;
 }
 
