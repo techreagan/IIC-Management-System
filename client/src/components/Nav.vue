@@ -22,17 +22,9 @@
         </div>
       </nav>
     </div>
-    <ul id="slide-out" class="sidenav sidenav-fixed">
+    <ul id="slide-out" class="sidenav sidenav-fixed" ref="sideNav">
       <li>
-        <!-- <div class="user-view"> -->
         <h5 class="primary-grey-color" style="margin-left: .6em">Dashboard</h5>
-        <!-- <a href="#name">
-            <span class="secondary-grey-color name">Hello, d</span>
-          </a>
-          <a href="#email">
-            <span class="secondary-grey-color email">d</span>
-        </a>-->
-        <!-- </div> -->
       </li>
       <ul class="collapsible">
         <li>
@@ -93,30 +85,6 @@
           </div>
         </li>
       </ul>
-
-      <!-- <li>
-        <div class="divider"></div>
-      </li>
-      <li>
-        <a class>Account</a>
-      </li>
-      <li>
-        <a class="waves-effect primary-grey-color" href="/dashboard/settings"
-          >Settings</a
-        >
-      </li>-->
-      <!-- <li>
-        <form method="post" action="/logout">
-          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-          <input
-            value="Logout"
-            name="logout"
-            type="submit"
-            class="btn primary-grey-color"
-            id="logout"
-          />
-        </form>
-      </li>-->
     </ul>
   </header>
 </template>
@@ -124,9 +92,6 @@
 <style scoped lang="scss">
 .collapsible > .active .collapsible-header {
   background-color: #1a2035 !important;
-  a {
-    // color: #a9afbbd1 !important;
-  }
 }
 #slide-out.sidenav {
   .user-view {
@@ -168,3 +133,17 @@
   margin-bottom: 2em;
 }
 </style>
+
+<script src="/"></script>
+
+<script>
+export default {
+  methods: {
+    closeSideNav() {
+      const instance = M.Sidenav.getInstance(this.$refs['sideNav'])
+      console.log('hello')
+      instance.close()
+    }
+  }
+}
+</script>

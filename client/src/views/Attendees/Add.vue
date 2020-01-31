@@ -2,7 +2,7 @@
   <div class="col s12 m10 l8 xl6">
     <ValidationObserver v-slot="{ handleSubmit }">
       <form @submit.prevent="handleSubmit(onSubmit)">
-        <div class="card primary-color">
+        <div class="card primary-color mt-3">
           <div class="card-content pb-0">
             <span class="card-title">Add Attendee</span>
             <div class="row mb-0">

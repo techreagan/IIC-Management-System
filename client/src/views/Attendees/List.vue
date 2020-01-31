@@ -1,6 +1,7 @@
 <template>
   <div class="col s12 m12 l10">
-    <div class="card-panel primary-color">
+    <div class="card-panel primary-color mt-3 overflow">
+      <h5 class="heading mt-0"><strong>Attendees</strong></h5>
       <table class="centeed nav" id="table">
         <thead class="purple-background white-text">
           <tr>
@@ -8,6 +9,7 @@
             <th>Email</th>
             <th>Company</th>
             <th>Actions</th>
+            <th></th>
           </tr>
         </thead>
 
@@ -28,12 +30,16 @@
                     <i style class="fas fa-trash"></i>
                   </a>
                 </div>
-
+              </div>
+            </td>
+            <td>
+              <div class="row">
                 <div class="col m2 offset-m2">
                   <a
-                    href="/interview/<%= interview._id %>"
-                    target="_blank"
-                    class="btn-small purple-background"
+                    @click="detailsModal(attendee._id)"
+                    href="#detailsModal"
+                    :ref="attendee._id"
+                    class="btn-small purple-background modal-trigger"
                     >Details</a
                   >
                 </div>
@@ -130,6 +136,32 @@
         </button>
       </div>
     </div>
+    <div id="detailsModal" ref="detailsModal" class="modal">
+      <div class="modal-content">
+        <h4 class="black-text">Add attendee to talk</h4>
+        <div class="row">
+          <!-- <div class="input-field col s12"> -->
+          <label>Select Talk</label>
+          <select v-model="talkId" class="browser-default">
+            <option value="" disabled selected>Choose your option</option>
+            <option v-for="talk in talks" :key="talk._id" :value="talk._id">{{
+              talk.title
+            }}</option>
+            <!-- <option value="2">Option 2</option>
+              <option value="3">Option 3</option> -->
+          </select>
+          <!-- </div> -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+          >cancel</a
+        >
+        <button type="submit" class="btn red" @click="addAttendee">
+          Add Attendee
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -147,12 +179,15 @@
 
 <script>
 import AttendeeService from '@/services/AttendeeService'
+import TalkService from '@/services/TalkService'
 
 export default {
   data() {
     return {
       isLoading: true,
       attendees: [],
+      talks: [],
+      talkId: '',
       page: 1,
       attendeeId: null,
       errors: null
@@ -160,6 +195,9 @@ export default {
   },
   methods: {
     deleteModal(id) {
+      this.attendeeId = id
+    },
+    detailsModal(id) {
       this.attendeeId = id
     },
     async currentPage(num) {
@@ -193,6 +231,29 @@ export default {
       //   attendee => attendee._id == this.attendeeId
       // )
       M.toast({ html: 'Attendee Deleted', classes: 'red rounded' })
+    },
+    async addAttendee(event) {
+      if (this.talkId == '') return true
+      const instance = M.Modal.getInstance(this.$refs['detailsModal'])
+      const talk = await TalkService.addAttendee(
+        this.talkId,
+        this.attendeeId
+      ).catch(err => {
+        this.errors = err.response.data.error
+        instance.close()
+        M.toast({ html: err.response.data.error, classes: 'red rounded' })
+        return false
+      })
+
+      if (talk) {
+        M.toast({ html: 'Attendee added to talk', classes: 'green rounded' })
+      }
+
+      this.$refs['detailsModal']
+        .querySelector('select')
+        .getElementsByTagName('option')[0].selected = 'selected'
+
+      instance.close()
     }
   },
   async mounted() {
@@ -203,6 +264,12 @@ export default {
     this.attendees = attendees.data
 
     this.isLoading = false
+
+    const talks = await TalkService.getAll('sort=title').catch(
+      err => (this.errors = err.reponse.data.error)
+    )
+    this.talks = talks.data.data
+    // console.log(this.talks)
     M.AutoInit()
   },
   created() {

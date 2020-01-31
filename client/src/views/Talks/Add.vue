@@ -3,7 +3,7 @@
     <ValidationObserver v-slot="{ handleSubmit }">
       <form @submit.prevent="handleSubmit(onSubmit)">
         <div class="card primary-color">
-          <div class="card-content pb-0">
+          <div class="card-content pb-0 mt-3">
             <span class="card-title">Add Talk</span>
             <div class="row mb-0">
               <validation-provider

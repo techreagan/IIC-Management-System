@@ -1,24 +1,24 @@
 <template>
   <div class="col s12 m12">
     <!-- <button class="btn green">Add Talk</button> -->
-    <div class="card-panel primary-color">
+    <div class="card-panel primary-color mt-3 overflow">
+      <h5 class="heading mt-0"><strong>Talks</strong></h5>
       <table class="centeed nav" id="table">
         <thead class="purple-background white-text">
           <tr>
             <th>Title</th>
             <th>Speaker Full Name</th>
-            <th>Speaker Email</th>
             <th>Speaker Company</th>
             <th>Actions</th>
+            <th></th>
           </tr>
         </thead>
 
         <tbody id="tableBody">
           <tr v-for="talk in talks.data" :key="talk._id">
-            <td class="truncate">{{ talk.title }}</td>
+            <td>{{ talk.title }}</td>
             <td>{{ talk.speakerFullName }}</td>
-            <td>{{ talk.speakerEmail }}</td>
-            <td class="truncate">{{ talk.speakerCompany }}</td>
+            <td>{{ talk.speakerCompany }}</td>
             <td class="cf">
               <div class="row">
                 <div class="col m2">
@@ -31,13 +31,16 @@
                     <i style class="fas fa-trash"></i>
                   </a>
                 </div>
-
-                <div class="col m2 offset-m2">
-                  <a
-                    href="/interview/<%= interview._id %>"
-                    target="_blank"
+              </div>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col m2">
+                  <router-link
+                    :to="{ name: 'details', params: { id: talk._id } }"
+                    tag="a"
                     class="btn-small purple-background"
-                    >Details</a
+                    >Details</router-link
                   >
                 </div>
               </div>

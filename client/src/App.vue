@@ -51,8 +51,20 @@ body {
   margin-top: 0 !important;
 }
 
+.mt-3 {
+  margin-top: 3.5em !important;
+}
+
 .mb-0 {
   margin-bottom: 0 !important;
+}
+
+.overflow {
+  overflow-x: auto;
+}
+
+.th {
+  border-radius: 0px !important;
 }
 
 .cf::after {
@@ -205,19 +217,46 @@ ul.dropdown-content.select-dropdown span {
 #dashboard .nav-wrapper {
   padding-left: 20px;
   padding-right: 20px;
+  @media (max-width: 600px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 #dashboard .nav-wrapper .brand-logo {
-  padding-left: 10px;
+  // padding-left: 10px;
+  text-transform: uppercase;
   font-size: 1.6em;
+  strong {
+    font-weight: 800;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 1.2em;
+  }
+  @media (max-width: 450px) {
+    font-size: 0.9em;
+  }
+}
+
+.heading {
+  margin-bottom: 1em;
+  strong {
+    font-weight: normal;
+    font-size: 1em;
+  }
 }
 
 #dashboard main .container-fluid {
   padding-left: 20px;
   padding-right: 20px;
+  @media (max-width: 600px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
-@media only screen and (max-width: 992px) {
+@media (max-width: 992px) {
   #dashboard header.dashboard,
   #dashboard main.dashboard {
     padding-left: 0;
@@ -235,7 +274,7 @@ export default {
   },
   methods: {
     clickModal(e) {
-      console.log(e)
+      // console.log(e)
     }
   },
   mounted() {
