@@ -84,9 +84,7 @@ exports.getAttendeesByTalkId = asyncHandler(async (req, res, next) => {
   const talk = await Talk.findById(talkId)
 
   if (!talk) {
-    return next(
-      new ErrorResponse(`Talk with id of ${req.params.talkId} not found`, 404)
-    )
+    return next(new ErrorResponse(`Talk with id of ${talkId} not found`, 404))
   }
 
   // const talkAttendee = await TalkAttendee.find({

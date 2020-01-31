@@ -12,6 +12,8 @@ const talkSchema = new Schema(
       type: String,
       required: [false, 'Please add description']
     },
+    date: String,
+    time: String,
     speakerEmail: {
       type: String,
       required: [true, 'Please add speaker email'],
