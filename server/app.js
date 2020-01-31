@@ -51,6 +51,8 @@ app.use(limiter)
 // Prevent http param pollution
 app.use(hpp())
 
+app.use(express.static(path.join(__dirname, 'public')))
+
 const versionOne = routeName => `/api/v1/${routeName}`
 
 app.use(versionOne('talks'), talkRoutes)
