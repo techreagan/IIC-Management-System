@@ -39,8 +39,6 @@ MONGO_URI=mongodb://localhost/IIC-managment-system
 
 ## Client
 
----
-
 ### Project setup
 
 ```
@@ -70,8 +68,6 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Server
-
----
 
 Change directory to the server folder
 
@@ -103,8 +99,6 @@ node seeder -d
 ```
 
 ## Start web server
-
----
 
 ```console
 node run dev
