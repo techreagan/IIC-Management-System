@@ -143,7 +143,7 @@
     </div>
     <div id="detailsModal" ref="detailsModal" class="modal">
       <div class="modal-content">
-        <h4 class="black-text">Add attendee to talk</h4>
+        <h4 class="black-text">Add attendee to a talk</h4>
         <div class="row">
           <!-- <div class="input-field col s12"> -->
           <label>Select Talk</label>
