@@ -6,20 +6,20 @@ const attendeeSchema = new Schema(
   {
     email: {
       type: String,
-      required: [true, 'Please add speaker email'],
+      required: [true, 'Please add email'],
       unique: true,
       match: [
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-        'Please add a valid speaker email'
+        'Please add a valid email'
       ]
     },
     fullName: {
       type: String,
-      required: [true, 'Please add speaker full name']
+      required: [true, 'Please add full name']
     },
     company: {
       type: String,
-      required: [true, 'Please add speaker company']
+      required: [true, 'Please add company']
     }
   },
   { timestamps: true }

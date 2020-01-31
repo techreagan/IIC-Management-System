@@ -11,6 +11,19 @@ exports.getTalks = asyncHandler(async (req, res, next) => {
   res.status(200).json(res.advancedResults)
 })
 
+// @desc    Get single talks
+// @route   GET /api/v1/talks/:id
+// @access  Public
+exports.getTalk = asyncHandler(async (req, res, next) => {
+  const talk = await Talk.findById(req.params.id)
+  if (!talk) {
+    return next(
+      new ErrorResponse(`Talk with id of ${req.params.talkId} not found`, 404)
+    )
+  }
+  res.status(200).json({ success: true, data: talk })
+})
+
 // @desc    Create talk
 // @route   POST /api/v1/talks
 // @access  Public
@@ -61,6 +74,27 @@ exports.addAttendee = asyncHandler(async (req, res, next) => {
   })
 
   res.status(200).json({ success: true, data: talkAttendee })
+})
+// @desc    Get attendees by talk id
+// @route   GET /api/v1/talks/attendees/?_id=dddags454
+// @access  Public
+exports.getAttendeesByTalkId = asyncHandler(async (req, res, next) => {
+  const talkId = req.query.talk
+
+  const talk = await Talk.findById(talkId)
+
+  if (!talk) {
+    return next(
+      new ErrorResponse(`Talk with id of ${req.params.talkId} not found`, 404)
+    )
+  }
+
+  // const talkAttendee = await TalkAttendee.find({
+  //   talk: talkId
+  // }).populate({ path: 'attendees' })
+
+  // res.status(200).json({ success: true, data: talkAttendee })
+  res.status(200).json(res.advancedResults)
 })
 
 // @desc    Delete Talk
