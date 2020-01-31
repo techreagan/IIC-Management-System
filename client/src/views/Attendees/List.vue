@@ -170,14 +170,14 @@
   </div>
 </template>
 
-<style scoped>
+<style>
 .preloader-wrapper {
   display: flex;
   margin: 20px auto;
 }
-.nav {
+/* .nav {
   overflow-x: scroll !important;
-}
+} */
 </style>
 
 <script src="/"></script>
