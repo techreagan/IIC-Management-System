@@ -7,7 +7,7 @@ const {
   getAttendees,
   createAttendee,
   deleteAttendee
-} = require('../controllers/Attendees')
+} = require('../controllers/attendees')
 
 const advancedResults = require('../middleware/advancedResults')
 
